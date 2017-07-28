@@ -1,0 +1,110 @@
+#app {
+    position: relative;
+}
+
+.sub-nav {
+    height: 60px;
+    padding-top: 12px;
+    padding-right: 20px;
+    padding-left: 70px;
+    font-family: Lato, sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    &.dark {
+        background-color: #424242;
+        color: $white;
+    }
+    &.light {
+        background-color: #EFFFFF;
+        color: #424242;
+    }
+}
+
+.w-clearfix:before {
+    content: " ";
+    display: table;
+}
+
+.w-clearfix:after {
+    content: " ";
+    display: table;
+    clear: both;
+}
+
+.nav-dropdown {
+    top: 2px;
+}
+
+.nav-dropdown.right-dropdown {
+    margin-top: 10px;
+    float: right;
+    font-size: 16px;
+    z-index: 922;
+    &.notification-container {
+        margin-right: 20px;
+        @media only screen and (max-width: 480px) {
+            // margin-right: 5px;
+        }
+        .notification-icon {
+            position: relative;
+        }
+    }
+}
+
+.profile-header-dropdown {
+    span.name {
+        display: inline-block;
+        @media only screen and (max-width: 480px) {
+            display: none;
+        }
+    }
+}
+
+.statistics {
+    // padding-left: 30px;
+    .five {
+        .statistic {
+            @media only screen and (max-width: 480px) {
+                min-width: 50% !important;
+            }
+        }
+    }
+}
+
+.settings-modal {
+    color: $white !important;
+    .freq-label {
+        background: #403e3e !important;
+        color: $white !important;
+        border: none !important;
+        font-size: 1em;
+        padding-left: 0px;
+        font-weight: 300;
+    }
+    .header {
+        color: $white !important;
+        background: $darkgrey !important;
+    }
+    .content {
+        background: #403e3e !important;
+        label {
+            color: $white !important;
+        }
+    }
+}
+
+.negative-red {
+    color: red;
+}
+
+.filter-col {
+    float: right;
+    margin-left: 20px !important;
+    cursor: pointer;
+}
+
+.go-btn {
+    margin-left: 10px;
+    color: $lightblue;
+    cursor: pointer;
+}

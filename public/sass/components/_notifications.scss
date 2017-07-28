@@ -1,0 +1,14 @@
+.ui.popup.notification-popup {
+    padding: 0px;
+    max-height: 300px;
+    overflow-y: auto;
+    .ui.feed.notifications {
+        .event {
+            cursor: pointer;
+            padding: 10px;
+            &.unread {
+                background: linear-gradient(rgba(29, 33, 41, .04), rgba(29, 33, 41, .04));
+            }
+        }
+    }
+}

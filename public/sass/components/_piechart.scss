@@ -1,0 +1,27 @@
+.recharts-default-legend {
+    // background: $white_70;
+    color: $white;
+}
+
+.recharts-wrapper {
+    &.resp-piechart {
+        display: inline-block;
+    }
+}
+
+.recharts-cartesian-axis-tick text {
+    fill: $white_70;
+}
+
+.recharts-tooltip-wrapper {
+    .recharts-default-tooltip {
+        background-color: $charcoal !important;
+        .recharts-tooltip-label {
+            color: $white_70;
+        }
+    }
+    .heatmap-tooltip {
+        padding: 15px;
+        color: $white_70;
+    }
+}

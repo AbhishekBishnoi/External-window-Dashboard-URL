@@ -1,0 +1,18 @@
+# Add any directories, files, or patterns you don't want to be tracked by version control
+
+logs
+*.log
+node_modules
+
+# Project
+.idea
+*.iml
+.DS_Store
+
+.sass-cache
+.env
+build
+npm-debug.log
+^npm-debug.log
+npm-debug
+npm-debug.log*

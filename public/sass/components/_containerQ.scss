@@ -1,0 +1,23 @@
+.width-between-200-and-399 {
+    div {
+        display: inline-block;
+        padding: 20px;
+        height: 30px;
+        background: $apple;
+        text-align: center;
+        p {
+            line-height: 0px;
+        }
+    }
+}
+
+.width-larger-than-400 {
+    div {
+        display: block;
+        height: 60px;
+        padding: 20px;
+        margin: 10px;
+        text-align: center;
+        background: $lightblue;
+    }
+}

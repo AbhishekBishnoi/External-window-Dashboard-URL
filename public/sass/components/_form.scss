@@ -1,0 +1,17 @@
+.contact-form {
+    .input-row {
+        padding: 5px 0px;
+        &.dirty {
+            input {
+                color: white;
+                background: #CC0000;
+            }
+        }
+    }
+    button[type="submit"] {
+        background: red;
+        &[disabled] {
+            background: green
+        }
+    }
+}
