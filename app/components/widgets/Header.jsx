@@ -146,6 +146,7 @@ export default class Header extends React.Component {
         let logo = this.state.theme == 'light' ? 'logo-dark.png' : 'logo.png';
 
         var _info;
+        var _mainWin, apps = [] ;
 
         document.addEventListener("DOMContentLoaded", function(){
             _info = document.querySelector('#info');
@@ -169,28 +170,114 @@ export default class Header extends React.Component {
 
 
         function initWithOpenFin(){
-            alert("OpenFin is available.");
-            // Your OpenFin specific code to go here...
-            document.querySelector('#new-window').addEventListener('click', ()=>{
+          // NB it is 'Window' not 'Application' that the EventListener is being attached to
+          _mainWin = fin.desktop.Window.getCurrent();
 
-                OpenFinNewWindow().then((w)=>{
-                    console.log("The new window is ", w);
-                })
+          document.querySelector("#min-btt").addEventListener('click', function(e){
+              minAll()
+          });
+
+          document.querySelector("#max-btt").addEventListener('click', function(e){
+              maxAll();
+          });
+
+          _mainWin.addEventListener('close-requested', function(e) {
+              var challenge = confirm('are you sure?');
+              if (challenge == true) {
+                  terminateAllApps();
+                  _mainWin.close(true);
+              }else{
+                  //console.log("The confirm was false")
+              }
+          });
+      //create windows
+      // Now here, instead of the Widget names I have used, we could enter any chart type/tree map or Data Grid Chart the application wants to render.
+
+          initNewApp("WIDGET 1 - IMMUTABLE GRID").then(function(value){
+              var _childWin = value.getWindow()
+              _childWin.addEventListener('close-requested', function(e){
+                  console.log("close requested, but blocked. Close me from the main app.");
+                  _childWin.minimize();
+              });
+              apps.push(value);
+          });
+      // widget 2
+          initNewApp("WIDGET 2 - INFINITE GRID").then(function(value){
+              var _childWin2 = value.getWindow()
+              _childWin2.addEventListener('close-requested', function(e){
+                  console.log("close requested, but blocked. Close me from the main app.");
+                  _childWin2.minimize();
+              });
+              apps.push(value);
+          });
+
+          // widget 3
+          initNewApp("WIDGET 3 - POSITION DRILLDOWN").then(function(value){
+              var _childWin3 = value.getWindow()
+              _childWin3.addEventListener('close-requested', function(e){
+                  console.log("close requested, but blocked. Close me from the main app.");
+                  _childWin3.minimize();
+              });
+              apps.push(value);
+          });
+      }
 
 
-            });
+      function initNoOpenFin(){
+      alert("OpenFin is not available - you are probably running in a browser.");
+      }
+
+        function terminateAllApps(){
+          for(var app in apps ){
+              apps[app].terminate();
+          }
         }
 
-        function initNoOpenFin(){
-            alert(" OpenFin is NOT AVAILABLE. Probably running in Browser. Install Openfin runtime client at https://github.com/openfin/openfin-installer");
-            // Your browser-only specific code to go here...
+        function minAll(){
+          for(var app in apps ){51
+              apps[app].getWindow().minimize();
+          }
+        }
+
+        function maxAll(){
+          for(var app in apps ){
+              apps[app].getWindow().restore();
+          }
+        }
+
+
+        function initNewApp(uuid){
+          return new Promise(function(resolve, reject){
+              var volumeMatchApplication = new fin.desktop.Application({
+                  name: "BGC IRO Volume Match",
+                  uuid: uuid,
+                  url: "http://localhost:3030/test.html",
+                  mainWindowOptions: {
+                      name: "BGC IRO Volume Match",
+                      autoShow: true,
+                      defaultCentered: true,
+                      alwaysOnTop: false,
+                      state: "minimized",
+                      windowState: "minimized",
+                      saveWindowState: false,
+                      icon: "favicon.ico"
+                  }
+              }, function () {
+                  // Ensure the Volume Match application is closed when the main application is closed.
+                  console.log("running");
+                  volumeMatchApplication.run();
+                  resolve(volumeMatchApplication)
+              });
+          })
+
         }
 
         return (
             <div>
                   <div id="info">
                   <h3>OpenFin Windows</h3>
-                  <button id="new-window">New window</button>
+                  <button id ="max-btt">OPENFIN</button>
+                  <button id ="min-btt">MINIMIZE</button>
                   <div class="content"></div>
                   <GridLayout>
                       <div key={'d'} data-grid={{ i: 'd', x: 6, y: 6, w: 6, h: 9, minW: 2, maxW: 12 }}>
