@@ -192,7 +192,7 @@ export default class Header extends React.Component {
           });
       //create windows
       // Now here, instead of the Widget names I have used, we could enter any chart type/tree map or Data Grid Chart the application wants to render.
-
+      // Have to work on how to render the widgets corresponding to Data charts and Trees instead of blank Openfin window pages.
           initNewApp("WIDGET 1 - IMMUTABLE GRID").then(function(value){
               var _childWin = value.getWindow()
               _childWin.addEventListener('close-requested', function(e){
@@ -251,7 +251,7 @@ export default class Header extends React.Component {
               var volumeMatchApplication = new fin.desktop.Application({
                   name: "BGC IRO Volume Match",
                   uuid: uuid,
-                  url: "http://localhost:3030/test.html",
+                  url: "http://localhost:3030/",
                   mainWindowOptions: {
                       name: "BGC IRO Volume Match",
                       autoShow: true,
@@ -279,14 +279,6 @@ export default class Header extends React.Component {
                   <button id ="max-btt">OPENFIN</button>
                   <button id ="min-btt">MINIMIZE</button>
                   <div class="content"></div>
-                  <GridLayout>
-                      <div key={'d'} data-grid={{ i: 'd', x: 6, y: 6, w: 6, h: 9, minW: 2, maxW: 12 }}>
-                          <SimpleLineChart />
-                      </div>
-                      <div key={'c'} data-grid={{ i: 'c', x: 0, y: 6, w: 6, h: 9, minW: 2, maxW: 12 }}>
-                      <TreeMap />
-                      </div>
-                  </GridLayout>
                 </div>
                 <div className={'sub-nav w-clearfix' + this.state.theme}>
                     <a href='#'>
